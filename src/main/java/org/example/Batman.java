@@ -6,8 +6,19 @@ public class Batman extends Harvester{
     }
     @Override
     public void Superpower(){
-        System.out.println("Batman's superpower is in progress");
+        System.out.println("Batman has used his superpower");
+        char[][] mapArray = Map.getMapArray();
+        for (int i = 0; i < mapArray.length; i++) {
+            for (int j = 0; j < mapArray[i].length; j++) {
+                if (mapArray[i][j] != '0') {
+                    Tree tree = Map.getTreeAtPosition(i, j);
+                    if (tree != null) {
+                        height+=100;
+
+                        height-=100;
+                    }
+                }
+            }
+        }
     }
-
-
 }

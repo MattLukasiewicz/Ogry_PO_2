@@ -8,6 +8,7 @@ public class Santa_Claus  extends Harvester{
     public void Superpower(){
         System.out.println("Santa Claus has used his superpower");
 
+
     }
 
 

@@ -6,8 +6,9 @@ public class Shrek extends Harvester{
     }
 
     @Override
+    //Shrek's Superpower
     public void Superpower(){
-        System.out.println("Shrek has used his superpower");
+        System.out.println("Shrek uproots the tree with great force and collects all the fruit");
         char[][] mapArray = Map.getMapArray();
         for (int i = 0; i < mapArray.length; i++) {
             for (int j = 0; j < mapArray[i].length; j++) {
@@ -21,6 +22,4 @@ public class Shrek extends Harvester{
             }
         }
     }
-
-
 }

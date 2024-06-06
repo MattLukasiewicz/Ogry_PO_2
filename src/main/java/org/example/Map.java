@@ -70,8 +70,11 @@ class Map {
     }
 
     public void Move(){
-        //Creating a hero
+        //Creating heroes
         Harvester Hero1 = new Shrek("Shrek", '%', 280, 1.0);
+        Harvester Hero2 = new Santa_Claus("Santa Claus", '#',150,1.0);
+        Harvester Hero3 = new Batman("Batman", '?',200,1.0);
+
         System.out.println("Name: " + Hero1.name + " Height: " + Hero1.height + " Accuracy: " + Hero1.harvesting_accuracy+ " Points: "+ Hero1.points);
 
         trees[0] = apple_tree;
@@ -82,7 +85,7 @@ class Map {
         int how_many_apple_trees = 0;
         int how_many_banana_trees = 0;
         int how_many_wild_strawberry_tree = 0;
-        int how_many_did_hero_already_harvest=0;
+        int how_much_hero_has_already_harvested=0;
 
         //Moving and Harvesting
         for (int i = 0; i <mapArray.length; i++) {
@@ -92,13 +95,13 @@ class Map {
                 if (mapArray[i][j] == wild_strawberry_tree.symbol) how_many_wild_strawberry_tree++;
 
                 if(mapArray[i][j]!='0'){
-                    how_many_did_hero_already_harvest++;
+                    how_much_hero_has_already_harvested++;
                     for(Tree tree : trees){
 
                         //Hero is using his superpower every 5th tree
-                        if(how_many_did_hero_already_harvest==6){
+                        if(how_much_hero_has_already_harvested==6){
                             Hero1.Superpower();
-                            how_many_did_hero_already_harvest=0;
+                            how_much_hero_has_already_harvested=0;
                         }
                         else{
 
