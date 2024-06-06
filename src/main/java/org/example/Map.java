@@ -6,7 +6,15 @@ import java.util.Scanner;
 import static java.lang.Math.abs;
 
 class Map {
-    private char[][] mapArray;
+    private static char[][] mapArray;
+
+    //Creating trees
+    static Tree[] trees = new Tree[3];
+
+    Tree apple_tree = new Tree("apple tree", 'J', 20, 240, 5);
+    Tree banana_tree = new Tree("banana tree", 'B', 10, 330, 10);
+    Tree wild_strawberry_tree = new Tree("wild strawberry tree", 'W', 1000, 100, 1);
+
 
     // Constructor that initializes the mapArray and loads the map from file
     public Map(String filename) {
@@ -45,63 +53,79 @@ class Map {
             System.out.println();
         }
     }
+
+    //Method to get map
+    public static char[][] getMapArray() {
+        return mapArray;
+    }
+
+    //Method to get a position of tree
+    public static Tree getTreeAtPosition(int i, int j) {
+        for (Tree tree : trees) {
+            if (mapArray[i][j] == tree.symbol) {
+                return tree;
+            }
+        }
+        return null;
+    }
+
     public void Move(){
         //Creating a hero
         Harvester Hero1 = new Shrek("Shrek", '%', 280, 1.0);
         System.out.println("Name: " + Hero1.name + " Height: " + Hero1.height + " Accuracy: " + Hero1.harvesting_accuracy+ " Points: "+ Hero1.points);
 
-        //Creating trees
-        Tree[] trees = new Tree[3];
-
-
-        Tree apple_tree = new Tree("apple_tree", 'J', 20, 240, 5);
-        Tree banana_tree = new Tree("banana_tree", 'B', 10, 330, 10);
-        Tree wild_strawberry_tree = new Tree("wild_strawberry_tree", 'W', 1000, 100, 1);
-
         trees[0] = apple_tree;
         trees[1] = banana_tree;
         trees[2] = wild_strawberry_tree;
-
 
         //Counting some data
         int how_many_apple_trees = 0;
         int how_many_banana_trees = 0;
         int how_many_wild_strawberry_tree = 0;
+        int how_many_did_hero_already_harvest=0;
 
         //Moving and Harvesting
-        for (int i = 0; i <5; i++) {
-            for (int j = 0; j <5; j++) {
+        for (int i = 0; i <mapArray.length; i++) {
+            for (int j = 0; j <mapArray[i].length; j++) {
                 if (mapArray[i][j] == apple_tree.symbol) how_many_apple_trees++;
                 if (mapArray[i][j] == banana_tree.symbol) how_many_banana_trees++;
                 if (mapArray[i][j] == wild_strawberry_tree.symbol) how_many_wild_strawberry_tree++;
+
                 if(mapArray[i][j]!='0'){
+                    how_many_did_hero_already_harvest++;
                     for(Tree tree : trees){
-                        if (mapArray[i][j] == tree.symbol) {
-                            double heightDiference =abs(Hero1.height-tree.heigh_of_the_fruits);
-                            if(heightDiference<=40){
-                                Hero1.points+= tree.maxPoints();
 
-                            }if(heightDiference>40&&heightDiference<100){
-                                Hero1.points+= tree.maxPoints()* heightDiference*0.01;
-
-                            }
-                            if(heightDiference>=100){
-                                Hero1.points+= tree.maxPoints()* heightDiference*0.001;
-
-                            }
-
-
+                        //Hero is using his superpower every 5th tree
+                        if(how_many_did_hero_already_harvest==6){
+                            Hero1.Superpower();
+                            how_many_did_hero_already_harvest=0;
                         }
+                        else{
+
+                        //Harvesting based on the height difference between hero and a tree
+                        if (mapArray[i][j] == tree.symbol) {
+                            double heightDifference = abs(Hero1.height - tree.heigh_of_the_fruits);
+                            if (heightDifference <= 40) {
+                                Hero1.points += tree.maxPoints();
+
+                            }
+                            if (heightDifference > 40 && heightDifference < 100) {
+                                Hero1.points += tree.maxPoints() * heightDifference * 0.01;
+
+                            }
+                            if (heightDifference >= 100) {
+                                Hero1.points += tree.maxPoints() * heightDifference * 0.001;
+
+                            }
+                        }
+                        }
+                        // Mark the tree as harvested
+                        mapArray[i][j] = '0';
                     }
-
                 }
-
-
-
-
             }
-
         }
+
         //Printing data
         System.out.println("How many apple trees: " + how_many_apple_trees + " Max points: " +how_many_apple_trees*apple_tree.maxPoints());
         System.out.println("How many banana trees: " + how_many_banana_trees+ " Max points: " +how_many_banana_trees*banana_tree.maxPoints());

@@ -7,7 +7,19 @@ public class Shrek extends Harvester{
 
     @Override
     public void Superpower(){
-        System.out.println("Shrek's superpower is not discovered yet");
+        System.out.println("Shrek has used his superpower");
+        char[][] mapArray = Map.getMapArray();
+        for (int i = 0; i < mapArray.length; i++) {
+            for (int j = 0; j < mapArray[i].length; j++) {
+                if (mapArray[i][j] != '0') {
+                    Tree tree = Map.getTreeAtPosition(i, j);
+                    if (tree != null) {
+                        points += tree.maxPoints();
+                        return;
+                    }
+                }
+            }
+        }
     }
 
 

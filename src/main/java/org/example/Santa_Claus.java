@@ -6,7 +6,8 @@ public class Santa_Claus  extends Harvester{
     }
     @Override
     public void Superpower(){
-        System.out.println("Santa Claus's superpower is not discovered yet");
+        System.out.println("Santa Claus has used his superpower");
+
     }
 
 
