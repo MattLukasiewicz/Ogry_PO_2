@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.Scanner;
 
 class Map {
@@ -10,6 +11,10 @@ class Map {
     public Map(String filename) {
         mapArray = new char[5][5];
         loadMapFromFile(filename);
+    }
+    public Map(){
+        mapArray = new char[5][5];
+        randomMap();
     }
 
     // Method to load the map from a file into the mapArray
@@ -46,5 +51,16 @@ class Map {
 
     public char[][] getMapArray() {
         return mapArray;
+    }
+
+    char[] symbols={'W','J','B','0'};
+
+    public void randomMap(){
+        Random random = new Random();
+        for(int i=0;i<5;i++)
+            for(int j=0;j<5;j++){
+                int randomIndex = random.nextInt(symbols.length);
+                mapArray[i][j] = symbols[randomIndex];
+            }
     }
 }
