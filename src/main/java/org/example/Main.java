@@ -36,27 +36,36 @@ public class Main {
         System.out.println("1. Map1.txt");
         System.out.println("2. Map2.txt");
         System.out.println("3. Map3.txt");
+        System.out.println("4. Random Map");
         System.out.println("Insert here: ");
 
         int mapChoice = scanner.nextInt();
         String mapFilename;
+        Map map;
 
         switch (mapChoice) {
             case 1:
                 mapFilename = "Map1.txt";
+                map = new Map(mapFilename);
                 break;
             case 2:
                 mapFilename = "Map2.txt";
+                map = new Map(mapFilename);
                 break;
             case 3:
                 mapFilename = "Map3.txt";
+                map = new Map(mapFilename);
+                break;
+            case 4:
+                map = new Map();
                 break;
             default:
                 System.out.println("Invalid choice! Defaulting to Map1.txt.");
                 mapFilename = "Map1.txt";
+                map = new Map(mapFilename);
         }
 
-        Map map = new Map(mapFilename);
+
         map.displayMap();
 
         Move move = new Move(map, hero);
