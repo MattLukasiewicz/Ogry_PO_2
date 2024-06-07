@@ -15,6 +15,6 @@ public class Harvester {
     }
 
     public void Superpower(Tree tree) {
-        // Domyślna implementacja, która może zostać nadpisana przez podklasy
+        // Default implementation that can be overridden by subclasses
     }
 }
