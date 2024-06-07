@@ -11,7 +11,7 @@ public class Move {
         this.map = map;
         this.hero = hero;
         this.trees = new Tree[]{
-                new Tree("apple_tree", 'J', 20, 240, 5),
+                new Tree("apple_tree", 'J', 20, 200, 5),
                 new Tree("banana_tree", 'B', 10, 330, 10),
                 new Tree("wild_strawberry_tree", 'W', 1000, 100, 1)
         };

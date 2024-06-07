@@ -7,6 +7,9 @@ public class Santa_Claus extends Harvester {
 
     @Override
     public void Superpower(Tree tree) {
-        System.out.println("Santa Claus's superpower is not discovered yet");
+        System.out.println("Santa Claus calls his dwarf who helps him collect of current tree");
+        if(tree.heigh_of_the_fruits<120) {
+            points+=tree.maxPoints();
+        }
     }
 }

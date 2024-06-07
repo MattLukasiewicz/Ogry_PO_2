@@ -11,6 +11,7 @@ public class Main {
         System.out.println("1. Shrek");
         System.out.println("2. Batman");
         System.out.println("3. Santa Claus");
+        System.out.println("Insert here: ");
 
         int heroChoice = scanner.nextInt();
         Harvester hero;
@@ -35,6 +36,7 @@ public class Main {
         System.out.println("1. Map1.txt");
         System.out.println("2. Map2.txt");
         System.out.println("3. Map3.txt");
+        System.out.println("Insert here: ");
 
         int mapChoice = scanner.nextInt();
         String mapFilename;
