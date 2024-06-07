@@ -30,26 +30,30 @@ public class Move {
             for (int j = 0; j < 5; j++) {
                 char currentSymbol = mapArray[i][j];
 
-                if (currentSymbol == trees[0].symbol) howManyAppleTrees++;
-                if (currentSymbol == trees[1].symbol) howManyBananaTrees++;
-                if (currentSymbol == trees[2].symbol) howManyWildStrawberryTrees++;
 
-                for (Tree tree : trees) {
-                    if (currentSymbol == tree.symbol) {
-                        treesVisited++;
-                        double heightDifference = abs(hero.height - tree.heigh_of_the_fruits);
+                if(currentSymbol!='0'){
+                    if (currentSymbol == trees[0].symbol) howManyAppleTrees++;
+                    if (currentSymbol == trees[1].symbol) howManyBananaTrees++;
+                    if (currentSymbol == trees[2].symbol) howManyWildStrawberryTrees++;
+                    for (Tree tree : trees) {
+                        if (currentSymbol == tree.symbol) {
+                            treesVisited++;
+                            if (treesVisited % 5 == 0) {
+                                hero.Superpower(tree);
+                            }else{
+                                double heightDifference = abs(hero.height - tree.heigh_of_the_fruits);
 
-                        if (heightDifference <= 40) {
-                            hero.points += tree.maxPoints();
-                        } else if (heightDifference > 40 && heightDifference < 100) {
-                            hero.points += tree.maxPoints() * heightDifference * 0.01;
-                        } else if (heightDifference >= 100) {
-                            hero.points += tree.maxPoints() * heightDifference * 0.001;
+                                if (heightDifference <= 40) {
+                                    hero.points += tree.maxPoints();
+                                } else if (heightDifference > 40 && heightDifference < 100) {
+                                    hero.points += tree.maxPoints() * heightDifference * 0.01;
+                                } else if (heightDifference >= 100) {
+                                    hero.points += tree.maxPoints() * heightDifference * 0.001;
+                                }
+
+                            }
                         }
 
-                        if (treesVisited % 5 == 0) {
-                            hero.Superpower(tree);
-                        }
                     }
                 }
             }
