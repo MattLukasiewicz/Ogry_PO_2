@@ -6,14 +6,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        //Program mode selectioon
+        // Program mode selection
         System.out.println("Choose mode of the program:");
         System.out.println("1. Custom play");
         System.out.println("2. Simulation");
         System.out.println("Insert here: ");
-        int modeChoice=scanner.nextInt();
+        int modeChoice = scanner.nextInt();
 
-        switch(modeChoice){
+        switch (modeChoice) {
             case 1:
                 // Hero selection
                 System.out.println("Choose your hero:");
@@ -49,31 +49,27 @@ public class Main {
                 System.out.println("Insert here: ");
 
                 int mapChoice = scanner.nextInt();
-                String mapFilename;
                 Map map;
 
                 switch (mapChoice) {
                     case 1:
-                        mapFilename = "Map1.txt";
-                        map = new Map(mapFilename);
+                        map = new Map("Map1.txt");
                         break;
                     case 2:
-                        mapFilename = "Map2.txt";
-                        map = new Map(mapFilename);
+                        map = new Map("Map2.txt");
                         break;
                     case 3:
-                        mapFilename = "Map3.txt";
-                        map = new Map(mapFilename);
+                        map = new Map("Map3.txt");
                         break;
                     case 4:
-                        map = new Map();
+                        System.out.println("Enter map size: ");
+                        int mapSize = scanner.nextInt();
+                        map = new Map(mapSize);
                         break;
                     default:
                         System.out.println("Invalid choice! Defaulting to Map1.txt.");
-                        mapFilename = "Map1.txt";
-                        map = new Map(mapFilename);
+                        map = new Map("Map1.txt");
                 }
-
 
                 map.displayMap();
 
@@ -86,17 +82,19 @@ public class Main {
                 System.out.println("Do you want to display every map?");
                 System.out.println("Yes(1), No(0)");
                 int mapDisplaySimulation = scanner.nextInt();
+                System.out.println("Enter map size for simulations: ");
+                int simulationMapSize = scanner.nextInt();
 
-                Harvester[] heros = {
+                Harvester[] heroes = {
                         new Shrek("Shrek", '%', 280, 1.0),
                         new Batman("Batman", '#', 190, 1),
                         new Santa_Claus("Santa Claus", '@', 160, 1)
                 };
 
                 for (int i = 0; i < howManySimulations; i++) {
-                    map = new Map();
-                    if(mapDisplaySimulation==1) map.displayMap();
-                    for (Harvester simHero : heros) {
+                    map = new Map(simulationMapSize);
+                    if (mapDisplaySimulation == 1) map.displayMap();
+                    for (Harvester simHero : heroes) {
                         Move moveSimulation = new Move(map, simHero);
                         moveSimulation.execute();
                     }
@@ -105,8 +103,5 @@ public class Main {
             default:
                 System.out.println("Invalid choice!");
         }
-
-
-
     }
 }

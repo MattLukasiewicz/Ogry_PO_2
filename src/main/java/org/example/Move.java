@@ -19,6 +19,7 @@ public class Move {
 
     public void execute() {
         char[][] mapArray = map.getMapArray();
+        int mapSize = map.getMapSize();
 
         int howManyAppleTrees = 0;
         int howManyBananaTrees = 0;
@@ -26,12 +27,11 @@ public class Move {
 
         int treesVisited = 0;
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < mapSize; i++) {
+            for (int j = 0; j < mapSize; j++) {
                 char currentSymbol = mapArray[i][j];
 
-
-                if(currentSymbol!='0'){
+                if (currentSymbol != '0') {
                     if (currentSymbol == trees[0].symbol) howManyAppleTrees++;
                     if (currentSymbol == trees[1].symbol) howManyBananaTrees++;
                     if (currentSymbol == trees[2].symbol) howManyWildStrawberryTrees++;
@@ -40,7 +40,7 @@ public class Move {
                             treesVisited++;
                             if (treesVisited % 5 == 0) {
                                 hero.Superpower(tree);
-                            }else{
+                            } else {
                                 double heightDifference = abs(hero.height - tree.heigh_of_the_fruits);
 
                                 if (heightDifference <= 40) {
@@ -50,10 +50,8 @@ public class Move {
                                 } else if (heightDifference >= 100) {
                                     hero.points += tree.maxPoints() * heightDifference * 0.001;
                                 }
-
                             }
                         }
-
                     }
                 }
             }
