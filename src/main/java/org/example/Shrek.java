@@ -7,7 +7,6 @@ public class Shrek extends Harvester {
 
     @Override
     public void Superpower(Tree tree) {
-        System.out.println("Shrek's superpower is activated: Collecting max points from all fruits of the current tree!");
         points += tree.maxPoints();
     }
 }
