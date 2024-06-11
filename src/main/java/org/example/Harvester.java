@@ -17,4 +17,8 @@ public class Harvester {
     public void Superpower(Tree tree) {
         // Default implementation that can be overridden by subclasses
     }
+
+    public void resetPoints() {
+        this.points = 0.0;
+    }
 }

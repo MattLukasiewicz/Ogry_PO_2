@@ -105,11 +105,14 @@ public class Main {
                     }
                     int mapDisplaySimulation = scanner.nextInt();
 
+                    /*
                     System.out.println("Enter map size for simulations: ");
                     if (!scanner.hasNextInt()) {
                         throw new InputMismatchException("Invalid input. Please enter a number.");
                     }
                     int simulationMapSize = scanner.nextInt();
+                    */
+                    int simulationMapSize = 5;
 
                     Harvester[] heroes = {
                             new Shrek("Shrek", '%', 280, 1.0),
@@ -123,6 +126,8 @@ public class Main {
                         for (Harvester simHero : heroes) {
                             Move moveSimulation = new Move(map, simHero);
                             moveSimulation.execute();
+                            System.out.println("Hero: " + simHero.name + " gained " + simHero.points );
+                            simHero.resetPoints();
                         }
                     }
                     break;
