@@ -1,5 +1,8 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,7 +10,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        try {
+        try (PrintWriter csvWriter = new PrintWriter(new FileWriter("simulation_results.csv"))) {
+            // Write CSV header
+            csvWriter.println("Hero;Apple Trees;Banana Trees;Wild Strawberry Trees;Max Points;Hero Points");
+
             // Program mode selection
             System.out.println("Choose mode of the program:");
             System.out.println("1. Custom play");
@@ -88,7 +94,7 @@ public class Main {
 
                     map.displayMap();
 
-                    Move move = new Move(map, hero);
+                    Move move = new Move(map, hero, csvWriter);
                     move.execute();
                     break;
                 case 2:
@@ -105,13 +111,6 @@ public class Main {
                     }
                     int mapDisplaySimulation = scanner.nextInt();
 
-                    /*
-                    System.out.println("Enter map size for simulations: ");
-                    if (!scanner.hasNextInt()) {
-                        throw new InputMismatchException("Invalid input. Please enter a number.");
-                    }
-                    int simulationMapSize = scanner.nextInt();
-                    */
                     int simulationMapSize = 5;
 
                     Harvester[] heroes = {
@@ -120,21 +119,23 @@ public class Main {
                             new Santa_Claus("Santa Claus", '@', 160, 1)
                     };
 
+
+
                     for (int i = 0; i < howManySimulations; i++) {
                         map = new Map(simulationMapSize);
                         if (mapDisplaySimulation == 1) map.displayMap();
                         for (Harvester simHero : heroes) {
-                            Move moveSimulation = new Move(map, simHero);
+                            Move moveSimulation = new Move(map, simHero, csvWriter);
                             moveSimulation.execute();
-                            System.out.println("Hero: " + simHero.name + " gained " + simHero.points );
                             simHero.resetPoints();
                         }
+
                     }
                     break;
                 default:
                     System.out.println("Invalid choice!");
             }
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException | IOException e) {
             System.out.println(e.getMessage());
         } finally {
             scanner.close();

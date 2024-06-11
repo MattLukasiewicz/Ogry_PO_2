@@ -1,15 +1,19 @@
 package org.example;
 
+import java.io.PrintWriter;
+
 import static java.lang.Math.abs;
 
 public class Move {
     private Map map;
     private Harvester hero;
     private Tree[] trees;
+    private PrintWriter csvWriter;
 
-    public Move(Map map, Harvester hero) {
+    public Move(Map map, Harvester hero, PrintWriter csvWriter) {
         this.map = map;
         this.hero = hero;
+        this.csvWriter = csvWriter;
         this.trees = new Tree[]{
                 new Tree("apple_tree", 'J', 20, 200, 5),
                 new Tree("banana_tree", 'B', 10, 330, 10),
@@ -57,10 +61,17 @@ public class Move {
             }
         }
 
-        System.out.println("How many apple trees: " + howManyAppleTrees + " Max points: " + howManyAppleTrees * trees[0].maxPoints());
-        System.out.println("How many banana trees: " + howManyBananaTrees + " Max points: " + howManyBananaTrees * trees[1].maxPoints());
-        System.out.println("How many wild strawberry trees: " + howManyWildStrawberryTrees + " Max points: " + howManyWildStrawberryTrees * trees[2].maxPoints());
-        System.out.println("How many points does the hero have: " + hero.points);
+        double maxPoints = howManyAppleTrees * trees[0].maxPoints() +
+                howManyBananaTrees * trees[1].maxPoints() +
+                howManyWildStrawberryTrees * trees[2].maxPoints();
+
+        System.out.println("How many apple trees: " + howManyAppleTrees + " Max points from apple trees: " + howManyAppleTrees * trees[0].maxPoints());
+        System.out.println("How many banana trees: " + howManyBananaTrees + " Max points from banana trees: " + howManyBananaTrees * trees[1].maxPoints());
+        System.out.println("How many wild strawberry trees: " + howManyWildStrawberryTrees + " Max points from wildstrawberry trees: " + howManyWildStrawberryTrees * trees[2].maxPoints());
+        System.out.println("Map max points: "+maxPoints);
+        System.out.println("Hero: " + hero.name + " gained " + hero.points);
         System.out.println();
+
+        csvWriter.println(hero.name + ";" + howManyAppleTrees + ";" + howManyBananaTrees + ";" + howManyWildStrawberryTrees + ";" + maxPoints + ";" + hero.points);
     }
 }
